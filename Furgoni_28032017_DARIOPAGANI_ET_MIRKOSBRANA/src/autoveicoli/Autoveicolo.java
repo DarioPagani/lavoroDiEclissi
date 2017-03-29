@@ -16,8 +16,26 @@ public class Autoveicolo
 	// TODO da Finire
 	public Autoveicolo(final String parse)
 	{
+		// Variabili
+		String tmp = "";
+		
 		// Rimuovo TUTTE le tabulazioni
-		int numeroKmPOS = parse.lastIndexOf("numeroKm:");
+		parse.replace("\t", "");
+		
+		int numeroKmPOS = parse.lastIndexOf("numeroKm:") + 8;
+		
+		if(numeroKmPOS == -1)
+		{
+			System.err.println("Non è stato trovato \"numeroKm\"!\nUscita...");
+			System.exit(-2);
+		}
+		
+		for(int i = numeroKmPOS + 1, l = parse.length(); i < l && parse.charAt(i) != ';'; i++)
+		{
+			tmp = tmp.concat(String.valueOf(parse.charAt(i)));
+		}
+		this.numeroKm = (new Integer(tmp)).intValue();
+		
 	}
 
 	// Sets & gets
