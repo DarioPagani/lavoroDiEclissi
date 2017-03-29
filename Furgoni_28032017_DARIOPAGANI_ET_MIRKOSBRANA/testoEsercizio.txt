@@ -1,0 +1,37 @@
+Un'agenzia di trasporti associa a tutti i suoi mezzi una targa, una descrizione sintetica del mezzo, la data di produzione e i km che può ancora fare (quando i Km diventano 0 il mezzo non può più viaggiare).  Realizzare una classe MezzoDiTrasporto  con gli opportuni attributi e metodi get e set necessari. Realizzare il costruttore e un metodo DecrementaChilometri  che modifica il numero di KM  ancora da fare per essere funzionante.
+
+L'agenzia vuole fare distinzione tra i Camion e i Furgoncini. Ad un camion viene associato la capacità  max a pieno carico e l'insieme delle città (arraylist) che può raggiungere tramite i permessi a sua disposizione, se è un camion frigorifero oppure no, mentre ai Furgoncini viene associato la velocità media che può raggiungere e quanti banner pubblicitari può mettere in mostra. Prevedere la possibilità con i metodi opportuni di aggiungere e togliere città raggiungibili.
+Realizzare le sottoclassi Camion e Furgoncini estendendo opportunamente la classe MezzoDiTrasporto. Specializzare il metodo DecrementaChilometri  in modo, mentre nel caso di camion frigoriferi la quantità di km da decrementare viene calcolato aumentando del 10% (in quanto i camion frigoriferi hanno un usura maggiore e quindi bisogna considerare che il decremento dei km fatti sia maggiore di quello reale)
+
+Realizzare una classe ListaTrasporti che permetta all'utente di inserire i mezzi di trasporto che fanno parte dell'agenzia di trasporti. (c'è un numero massimo di mezzi d trasposto. Definire il metodo TotaleKM che calcoli il totale di KM che possono essere ancora percorsi da tutti i mezzi. In particolare bisogna prevedere un arraylist di mezzi, in cui memorizzare i camion e i furgoni.
+
+Gestire AggiungiMezzo (Camion o furgoncino) che permette l'inserimento nell'arraylist . Il Mezzo non può essere inserito se ne esiste già uno con lo stessa targa. Definire RimuoviMezzo che ha l'obiettivo di eliminare il mezzo con la targa specificata. Gestire i casi in cui la targa non è presente.
+
+Definire VisualizzaUnMezzo che restituisce i dati del Mezzo opportunamente formattati (il mezzo da visualizzare è quello con la targa specificata).
+
+Definire il metodo PuoAncoraViaggiare che riceve in ingresso il numero di anni massimo previsto per quel mezzo e la targa. Il metodo restituisce l'intero che rappresenta il numero di anni che il mezzo può ancora viaggiare (si calcola partendo dalla data attuale rispetto alla data di produzione. Se  la differenza supera gli anni ricevuti come parametro restituisce 0). Esempio se il mezzo è stato prodotto il 10 dicembre 2001 e il numero di anni che può viaggiare è 15, il metodo restituisce 0. Restuisce 0 anche se il numero di Km è 0
+
+Definire il metodo LeggiMezziTrasportoFile che legge i dati dei mezzi da un file di input il cui nome è ricevuto come parametro e li carica nell'arraylist
+
+Definire il metodo ScriviMezziTrasportoFile che legge i dati dei mezzi dall'array list e li copia in un file di testo il cui percorso è ricevuto come parametro. Il formato del file di output è uguale al formato del file di input.
+
+ 
+
+Nella classe interfaccia creare un menu per la gestione delle operazioni:
+
+    inserire un Camion (con i dati specificati dall'utente)
+    Cancellare un camion (la cui targa è definita dall'utente)
+    inserire un furgone (con i dati specificati dall'utente)
+    Cancellare un furgone (la cui targa è definita dall'utente)
+    visualizza un Camion (targa specificata in input)
+    visualizza un furgone (targa specificata in input)
+    Inserisci N mezzi (percorso file specificato dall'utente).
+    Scrivi i mezzi presenti in un file (percorso file specificato dall'utente )
+    visualizzare il totale dei KM di tutti i mezzi
+    decrementare il numero di Km fatti dal mezzo (targa specificata in input, km)
+    Visualizzare il numero di km totale che può essere ancora percorso da tutti i mezzi
+    verificare se un mezzo può ancora viaggiare (numero di anno massimo previsto, targa)
+
+ 
+
+Non ci devono essere stampa nelle classi (tranne che nel mail). Definire le interfacce dei metodi prevedendo i casi di errore
