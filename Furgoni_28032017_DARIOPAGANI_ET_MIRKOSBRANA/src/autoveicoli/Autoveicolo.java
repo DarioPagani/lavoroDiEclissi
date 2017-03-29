@@ -12,6 +12,13 @@ public class Autoveicolo
 		this.numeroKm		= numeroKm;
 		this.targa			= targa;
 	}
+	
+	// TODO da Finire
+	public Autoveicolo(final String parse)
+	{
+		// Rimuovo TUTTE le tabulazioni
+		int numeroKmPOS = parse.lastIndexOf("numeroKm:");
+	}
 
 	// Sets & gets
 	public int getNumeroKm() 
@@ -29,4 +36,16 @@ public class Autoveicolo
 		return targa;
 	}
 	
+	public String toString()
+	{
+		return "{\n" + this.toString(true) + "}";
+	}
+	
+	protected String toString(boolean noBrackets)
+	{
+		if(!noBrackets)
+			return this.toString();
+		
+		return "numeroKm:" + this.numeroKm + ";\ntarga:" + this.targa + ";\n";
+	}
 }
