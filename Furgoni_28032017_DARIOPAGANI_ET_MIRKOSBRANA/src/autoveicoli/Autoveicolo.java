@@ -24,7 +24,7 @@ public class Autoveicolo
 		
 		int numeroKmPOS = parse.lastIndexOf("numeroKm:") + 8;
 		
-		if(numeroKmPOS == -1)
+		if(numeroKmPOS - 8 == -1)
 		{
 			System.err.println("Non è stato trovato \"numeroKm\"!\nUscita...");
 			System.exit(-2);
@@ -36,6 +36,14 @@ public class Autoveicolo
 		}
 		this.numeroKm = (new Integer(tmp)).intValue();
 		
+		int targaPOS = parse.lastIndexOf("targa:") + 5;
+		tmp = "";
+		
+		for(int i = targaPOS, l = parse.length(); i < l && parse.charAt(i) != ';'; i++)
+		{
+			tmp = tmp.concat(String.valueOf(parse.charAt(i)));
+		}
+		this.targa = tmp.toString();
 	}
 
 	// Sets & gets
