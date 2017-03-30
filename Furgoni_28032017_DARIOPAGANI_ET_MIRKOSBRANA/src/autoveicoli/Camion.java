@@ -9,7 +9,6 @@ public class Camion extends Autoveicolo
 	private	boolean				isFrigo;
 	private	long				capacitaCarico		= 0;
 	private	ArrayList<String>	cittaRaggiungibili	= null;
-	private int 				permessi = 0;
 	
 	public Camion(int numeroKm, String targa, long capacitaCarico, GregorianCalendar dataProduzione, ArrayList<String> cittaRaggiungibili,boolean isFrigo) 
 	{
@@ -18,6 +17,30 @@ public class Camion extends Autoveicolo
 		this.capacitaCarico = capacitaCarico;
 		this.cittaRaggiungibili = cittaRaggiungibili;
 		this.isFrigo = isFrigo;
+	}
+	
+	public Camion(final String parse)
+	{
+		super(parse);
+		int isFrigoPOS = parse.lastIndexOf("isFrigo:") + ("isFrigo:").length() - 1;
+		String tmp = "";
+		
+		for(int i = isFrigoPOS, l = parse.length(); i < l && parse.charAt(i) != ';'; i++)
+		{
+			tmp = tmp.concat(String.valueOf(parse.charAt(i)));
+		}
+		
+		this.isFrigo = Boolean.parseBoolean(tmp);
+		
+		int capacitaCaricoPOS = parse.lastIndexOf("capacitaCarico:") + ("capacitaCarico:").length() - 1;
+		tmp = "";
+		
+		for(int i = capacitaCaricoPOS, l = parse.length(); i < l && parse.charAt(i) != ';'; i++)
+		{
+			tmp = tmp.concat(String.valueOf(parse.charAt(i)));
+		}
+		
+		this.capacitaCarico = (new Long(tmp)).intValue();
 	}
 	
 	public String toString()
@@ -50,6 +73,5 @@ public class Camion extends Autoveicolo
 			
 		}
 		super.decrementaKm(numeroDaDecrementare);
-		
 	}
 }

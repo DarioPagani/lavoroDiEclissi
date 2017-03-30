@@ -13,5 +13,21 @@ public class Furgone extends Autoveicolo
 		this.velocitaMedia = velocitaMedia;
 		this.numeroPubblicita = numeroPubblicita;
 	}
+
+	public float getVelocitaMedia() {
+		return velocitaMedia;
+	}
+
+	public void setVelocitaMedia(float velocitaMedia) {
+		this.velocitaMedia = velocitaMedia;
+	}
+
+	public int getNumeroPubblicita() {
+		return numeroPubblicita;
+	}
+
+	public void setNumeroPubblicita(int numeroPubblicita) {
+		this.numeroPubblicita = numeroPubblicita;
+	}
 	
 }
