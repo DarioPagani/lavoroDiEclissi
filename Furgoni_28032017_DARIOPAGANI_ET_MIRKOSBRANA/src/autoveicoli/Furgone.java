@@ -13,6 +13,29 @@ public class Furgone extends Autoveicolo
 		this.velocitaMedia = velocitaMedia;
 		this.numeroPubblicita = numeroPubblicita;
 	}
+	
+	public Furgone(String parse)
+	{
+		super(parse);
+		String tmp = "";
+		
+		// 
+		int velocitaPOS = parse.lastIndexOf("velocitaMedia:") + ("velocitaMedia:").length();
+		for(int i = velocitaPOS, l = parse.length(); i < l && parse.charAt(i) != ';'; i++)
+		{
+			tmp = tmp.concat(String.valueOf(parse.charAt(i)));
+		}
+		this.velocitaMedia = Float.valueOf(tmp);
+		tmp = "";
+		
+		//
+		int pubPOS = parse.lastIndexOf("numeroPubblicita:") + ("numeroPubblicita:").length();
+		for(int i = pubPOS, l = parse.length(); i < l && parse.charAt(i) != ';'; i++)
+		{
+			tmp = tmp.concat(String.valueOf(parse.charAt(i)));
+		}
+		this.numeroPubblicita = Integer.valueOf(tmp);
+	}
 
 	public float getVelocitaMedia() {
 		return velocitaMedia;
@@ -28,6 +51,11 @@ public class Furgone extends Autoveicolo
 
 	public void setNumeroPubblicita(int numeroPubblicita) {
 		this.numeroPubblicita = numeroPubblicita;
+	}
+	
+	public String toString()
+	{
+		return "{\n" + super.toString(true) + "velocitaMedia:" + this.velocitaMedia +";\nnumeroPubblicita:" + this.numeroPubblicita +";\n}";
 	}
 	
 }

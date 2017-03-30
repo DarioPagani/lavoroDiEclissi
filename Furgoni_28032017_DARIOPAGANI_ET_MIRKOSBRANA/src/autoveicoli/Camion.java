@@ -1,6 +1,7 @@
 package autoveicoli;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.GregorianCalendar;
 
 public class Camion extends Autoveicolo 
@@ -22,17 +23,16 @@ public class Camion extends Autoveicolo
 	public Camion(final String parse)
 	{
 		super(parse);
-		int isFrigoPOS = parse.lastIndexOf("isFrigo:") + ("isFrigo:").length() - 1;
+		int isFrigoPOS = parse.lastIndexOf("isFrigo:") + ("isFrigo:").length();
 		String tmp = "";
 		
 		for(int i = isFrigoPOS, l = parse.length(); i < l && parse.charAt(i) != ';'; i++)
 		{
 			tmp = tmp.concat(String.valueOf(parse.charAt(i)));
 		}
-		
 		this.isFrigo = Boolean.parseBoolean(tmp);
 		
-		int capacitaCaricoPOS = parse.lastIndexOf("capacitaCarico:") + ("capacitaCarico:").length() - 1;
+		int capacitaCaricoPOS = parse.lastIndexOf("capacitaCarico:") + ("capacitaCarico:").length();
 		tmp = "";
 		
 		for(int i = capacitaCaricoPOS, l = parse.length(); i < l && parse.charAt(i) != ';'; i++)
@@ -41,24 +41,44 @@ public class Camion extends Autoveicolo
 		}
 		
 		this.capacitaCarico = (new Long(tmp)).intValue();
+		
+		// Conversione della stringa in ArrayLista
+		int arrayPos = parse.lastIndexOf("cittaRaggiungibili:") + ("cittaRaggiungibili:").length();
+		tmp = "";
+		
+		if(parse.charAt(arrayPos) != '[')
+		{
+			System.err.println("Qualcosa è andato storto!");
+			System.exit(-4);
+		}
+		
+		for(int i = arrayPos + 1, l = parse.length(); i < l && parse.charAt(i) != ']'; i++)
+		{
+			if(parse.charAt(i) == ';')
+			{
+				System.err.println("Qualcosa è andato storto!");
+				System.exit(-4);
+			}
+			tmp = tmp.concat(String.valueOf(parse.charAt(i)));
+		}
+		this.cittaRaggiungibili = new ArrayList<String>(Arrays.asList(tmp.split(",")));
 	}
 	
 	public String toString()
 	{
 		return "{\n" + super.toString(true) + "isFrigo:" + this.isFrigo + ";\ncapacitàCarico:" 
-				+ this.capacitaCarico + ";\ncittaRaggiungibili:" + cittaRaggiungibili.toString() + ";\n}";
+				+ this.capacitaCarico + ";\ncittaRaggiungibili:" + this.cittaRaggiungibili.toString() + ";\n}";
 	}
 	
 	//METODI
 	
-	public void rimuoviCitta(String cittaRimovibile){
-		
-		this.cittaRaggiungibili.remove(cittaRimovibile);
-		
+	public void rimuoviCitta(String cittaRimovibile)
+	{	
+		this.cittaRaggiungibili.remove(cittaRimovibile);	
 	}
 	
-	public void aggiungiCitta(String cittaAggiungibile){
-		
+	public void aggiungiCitta(String cittaAggiungibile)
+	{	
 		//controllo, se la città è gia presente allora non agigungo niente.
 		if (!this.cittaRaggiungibili.contains(cittaAggiungibile)){
 			this.cittaRaggiungibili.add(cittaAggiungibile);
