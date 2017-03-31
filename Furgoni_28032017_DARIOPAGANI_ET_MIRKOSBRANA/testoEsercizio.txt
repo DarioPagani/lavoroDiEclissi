@@ -31,8 +31,8 @@ pecializzare il metodo DecrementaChilometri  in modo,
 
 Realizzare una classe ListaTrasporti che permetta all'utente di inserire 
  - i mezzi di trasporto che fanno parte dell'agenzia di trasporti. 
- (c'è un numero massimo di mezzi d trasposto. Definire il metodo TotaleKM che calcoli 
- il totale di KM che possono essere ancora percorsi da tutti i mezzi. 
+ (c'è un numero massimo di mezzi d trasposto. 
+ Definire il metodo TotaleKM che calcoli il totale di KM che possono essere ancora percorsi da tutti i mezzi. 
  In particolare bisogna prevedere un arraylist di mezzi, in cui memorizzare i camion 
  e i furgoni.)
 

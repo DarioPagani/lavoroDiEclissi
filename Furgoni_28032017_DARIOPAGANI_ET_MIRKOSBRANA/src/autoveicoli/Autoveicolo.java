@@ -1,6 +1,5 @@
 package autoveicoli;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
@@ -19,18 +18,17 @@ public class Autoveicolo
 		this.dataProduzione	= dataProduzione;
 	}
 	
-	public Autoveicolo(final String parse)
+	public Autoveicolo(final String parse) throws Exception
 	{
 		// Variabili
 		String tmp = "";
 		
-		int numeroKmPOS = parse.lastIndexOf("numeroKm:") + 9;
+		int numeroKmPOS = parse.lastIndexOf("numeroKm:");
 		
-		if(numeroKmPOS - 9 == -1)
-		{
-			System.err.println("Non è stato trovato \"numeroKm\"!\nUscita...");
-			System.exit(-2);
-		}
+		if(numeroKmPOS == -1)
+			throw new Exception("Not found token \"numeroKm:\" in string");
+		else
+			numeroKmPOS+=9;
 		
 		for(int i = numeroKmPOS , l = parse.length(); i < l && parse.charAt(i) != ';'; i++)
 		{
@@ -38,7 +36,11 @@ public class Autoveicolo
 		}
 		this.numeroKm = (new Integer(tmp)).intValue();
 		
-		int targaPOS = parse.lastIndexOf("targa:") + 6;
+		int targaPOS = parse.lastIndexOf("targa:");
+		if(targaPOS == -1)
+			throw new Exception("Not found token \"targa:\" in string");
+		else
+			targaPOS+=("targa:").length();
 		tmp = "";
 		
 		for(int i = targaPOS, l = parse.length(); i < l && parse.charAt(i) != ';'; i++)
@@ -49,23 +51,27 @@ public class Autoveicolo
 		tmp = "";
 		
 		// Ricerca data di produzione
-		int dataProduzioneKmPOS = parse.lastIndexOf("dataProduzione:") + ("dataProduzione:").length();
+		int dataProduzioneKmPOS = parse.lastIndexOf("dataProduzione:");
+		if(dataProduzioneKmPOS == -1)
+			throw new Exception("Not found token \"dataProduzione:\" in string");
+		else
+			dataProduzioneKmPOS+=+ ("dataProduzione:").length();
 		
 		for(int i = dataProduzioneKmPOS, l = parse.length(); i < l && parse.charAt(i) != ';'; i++)
 		{
 			tmp = tmp.concat(String.valueOf(parse.charAt(i)));
 		}
 		
-		this.dataProduzione = new GregorianCalendar();
-		try {
-			this.dataProduzione.setTime((new SimpleDateFormat("dd/MM/yyyy")).parse(tmp));
-		} catch (ParseException e) {
-			System.err.println("Qualcosa è andato storto:\n" + e.toString());
-			System.exit(-3);
-		}
+		this.dataProduzione = new GregorianCalendar();		
+		this.dataProduzione.setTime((new SimpleDateFormat("dd/MM/yyyy")).parse(tmp));
 	}
 
 	// Sets & gets
+	public GregorianCalendar getDataProduzione()
+	{
+		return this.dataProduzione;
+	}
+	
 	public int getNumeroKm() 
 	{
 		return numeroKm;
@@ -103,12 +109,7 @@ public class Autoveicolo
 		
 		if (this.numeroKm < 0 ){
 			
-			this.numeroKm = 0;
-			
-		}
-		
+			this.numeroKm = 0;	
+		}	
 	}
-	
-	
-	
 }

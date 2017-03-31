@@ -2,7 +2,9 @@ package agenzia;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
+import java.util.function.Predicate;
 
 import autoveicoli.Autoveicolo;
 import autoveicoli.Camion;
@@ -58,9 +60,9 @@ public class ListaTrasporti
 			}
 			
 			if(className.equals(Camion.class.getSimpleName()))
-				this.memoria.add((Autoveicolo)(new Camion(tmp)));
+				this.aggiungiMezzo(new Camion(tmp));
 			else if (className.equals(Furgone.class.getSimpleName()))
-				this.memoria.add((Autoveicolo)(new Furgone(tmp)));
+				this.aggiungiMezzo(new Furgone(tmp));
 			else if (className.equals("STOP"))
 				;
 			else
@@ -85,4 +87,55 @@ public class ListaTrasporti
 	{
 		cout.print(this.toString());
 	}
+	
+	// Metodi veri
+	public void aggiungiMezzo(final Autoveicolo toAdd) throws Exception
+	{
+		boolean esiste = false;
+		for(int i = 0, l = this.memoria.size(); i < l && (!esiste); i++)
+			if(this.memoria.get(i).getTarga().equals(toAdd.getTarga()))
+				esiste = true;
+		
+		if(esiste)
+			throw new Exception("Another vheichle has the same number plate!\n");
+		
+		this.memoria.add(toAdd);
+	}
+	
+	public void aggiungiMezzo(final Camion toAdd) throws Exception
+	{
+		this.aggiungiMezzo((Autoveicolo)(toAdd));
+	}
+	
+	public void aggiungiMezzo(final Furgone toAdd) throws Exception
+	{
+		this.aggiungiMezzo((Autoveicolo)(toAdd));
+	}
+	
+	public void rimuoviMezzo(final String targaDaEliminare)
+	{
+		Predicate<Autoveicolo> filter = i-> i.getTarga().equals(targaDaEliminare);
+		this.memoria.removeIf(filter);
+	}
+	
+	public long totaleChilometri()
+	{
+		long totale = 0;
+		for(int i = 0, l = this.memoria.size();i < l; i++)
+			totale+= this.memoria.get(i).getNumeroKm();
+		
+		return totale;
+	}
+	
+	/*public boolean circolazioneAmessa(final String targa, final GregorianCalendar dataScadenza)
+	{
+		Autoveicolo index = null;
+		boolean trovato = false;
+		for(int i = 0, l = this.memoria.size(); i < l && !trovato; i++)
+			if(this.memoria.get(i).getTarga().equals(targa))
+			{
+				trovato = true;
+				index = this.memoria.get(i);
+			}
+	}*/
 }

@@ -20,7 +20,7 @@ public class Camion extends Autoveicolo
 		this.isFrigo = isFrigo;
 	}
 	
-	public Camion(final String parse)
+	public Camion(final String parse) throws Exception
 	{
 		super(parse);
 		int isFrigoPOS = parse.lastIndexOf("isFrigo:") + ("isFrigo:").length();

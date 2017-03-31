@@ -15,7 +15,15 @@ public class IlMain
 		File unFile = new File("./files/input");
 		File uscita = new File("./files/testOutput");
 		
-		x.parse(new Scanner(unFile));
+		try
+		{
+			x.parse(new Scanner(unFile));
+		}
+		catch(Exception e)
+		{
+			System.err.println("Qualcosa è andato storto!\n" + e.toString());
+		}
+		
 		x.writeToBuffer(new PrintStream(uscita));
 	}	
 
