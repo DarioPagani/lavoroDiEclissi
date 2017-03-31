@@ -1,19 +1,22 @@
 package interfacciaTesto;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.io.PrintStream;
+import java.util.Scanner;
 
-import autoveicoli.Autoveicolo;
-import autoveicoli.Camion;
-import autoveicoli.Furgone;
+import agenzia.ListaTrasporti;
 
 public class IlMain 
 {
 
-	public static void main(String[] args) 
+	public static void main(String[] args) throws Exception 
 	{
-		Furgone x = new Furgone("{numeroKm:5;targa:XX-000-YY;dataProduzione:23/12/2010;velocitaMedia:23.2;numeroPubblicita:5;}");
-
-		System.out.println(x.toString());
+		ListaTrasporti x = new ListaTrasporti(5);
+		File unFile = new File("./files/testOutput");
+		File uscita = new File("./files/testOutput");
+		
+		x.parse(new Scanner(unFile));
+		x.writeToBuffer(new PrintStream(uscita));
 	}	
 
 }

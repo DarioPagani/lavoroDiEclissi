@@ -6,3 +6,13 @@ Furgone
 	velocitaMedia:23.2;
 	numeroPubblicita:5;
 }
+Camion
+{
+	numeroKm:100;
+	targa:Hey sono un camion;
+	dataProduzione:23/12/2012;
+	isFrigo:false;
+	capacitaCarico:10;
+	cittaRaggiungibili:[Pisa, Livorno, Firenze, Sesto San Giovanni];
+}
+STOP

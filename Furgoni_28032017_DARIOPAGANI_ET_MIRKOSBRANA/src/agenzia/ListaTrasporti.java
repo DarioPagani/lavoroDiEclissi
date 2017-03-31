@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import autoveicoli.Autoveicolo;
+import autoveicoli.Camion;
+import autoveicoli.Furgone;
 
 public class ListaTrasporti 
 {
@@ -18,13 +20,69 @@ public class ListaTrasporti
 		this.memoria = new ArrayList<Autoveicolo>(dimensioneParcoVeicoli);
 	}
 	
-	public void parse(final Scanner cin)
+	public void parse(final Scanner cin) throws Exception
 	{
-		;
+		String tmp = "";
+		
+		tmp = cin.nextLine();
+		while(!tmp.contains("STOP") && cin.hasNextLine())
+		{
+			tmp = tmp.concat(cin.nextLine());
+		}
+		//tmp = tmp.substring(tmp.indexOf("STOP"));
+		this.parse(tmp);
 	}
 	
-	public void parse(final String toParse)
+	public void parse(final String toParse) throws Exception
 	{
-		;
+		// Variabili
+		int i = 0;
+		int l = toParse.length();
+		String className = "";
+		String tmp = "";
+		
+		while(i < l)
+		{
+			className = "";
+			tmp = "";
+			// Ricerca token
+			for(;i < l && toParse.charAt(i) != '{' && toParse.charAt(i) != '\n'; i++)
+			{
+				className = className.concat(String.valueOf(toParse.charAt(i)));
+			}
+			
+			// Prendo la classe
+			for(; i < l && toParse.charAt(i-1) != '}'; i++)
+			{
+				tmp = tmp.concat(String.valueOf(toParse.charAt(i)));
+			}
+			
+			if(className.equals(Camion.class.getSimpleName()))
+				this.memoria.add((Autoveicolo)(new Camion(tmp)));
+			else if (className.equals(Furgone.class.getSimpleName()))
+				this.memoria.add((Autoveicolo)(new Furgone(tmp)));
+			else if (className.equals("STOP"))
+				;
+			else
+				throw new Exception("Someone has insert a mismatch name: \"" + className + "\"!");
+		}
+	}
+	
+	public String toString()
+	{
+		String output = "";
+		
+		for(int i = 0, l = this.memoria.size(); i < l; i++, output = output.concat("\n"))
+		{
+			output = output.concat(this.memoria.get(i).getClass().getSimpleName() + '\n');
+			output = output.concat(this.memoria.get(i).toString());
+		}
+		output = output.concat("STOP");
+		return output;
+	}
+	
+	public void writeToBuffer(final PrintStream cout)
+	{
+		cout.print(this.toString());
 	}
 }

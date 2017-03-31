@@ -61,12 +61,12 @@ public class Camion extends Autoveicolo
 			}
 			tmp = tmp.concat(String.valueOf(parse.charAt(i)));
 		}
-		this.cittaRaggiungibili = new ArrayList<String>(Arrays.asList(tmp.split(",")));
+		this.cittaRaggiungibili = new ArrayList<String>(Arrays.asList(tmp.split(", ")));
 	}
 	
 	public String toString()
 	{
-		return "{\n" + super.toString(true) + "isFrigo:" + this.isFrigo + ";\ncapacitàCarico:" 
+		return "{\n" + super.toString(true) + "isFrigo:" + this.isFrigo + ";\ncapacitaCarico:" 
 				+ this.capacitaCarico + ";\ncittaRaggiungibili:" + this.cittaRaggiungibili.toString() + ";\n}";
 	}
 	
