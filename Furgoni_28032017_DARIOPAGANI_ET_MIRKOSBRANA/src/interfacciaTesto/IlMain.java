@@ -12,7 +12,7 @@ public class IlMain
 	public static void main(String[] args) throws Exception 
 	{
 		ListaTrasporti x = new ListaTrasporti(5);
-		File unFile = new File("./files/testOutput");
+		File unFile = new File("./files/input");
 		File uscita = new File("./files/testOutput");
 		
 		x.parse(new Scanner(unFile));

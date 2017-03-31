@@ -15,4 +15,12 @@ Camion
 	capacitaCarico:10;
 	cittaRaggiungibili:[Pisa, Livorno, Firenze, Sesto San Giovanni];
 }
+Furgone
+{
+	numeroKm:45;
+	targa:Banana;
+	dataProduzione:01/01/1800;
+	velocitaMedia:60;
+	numeroPubblicita:300;
+}
 STOP
