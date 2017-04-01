@@ -101,6 +101,33 @@ public class ListaTrasporti
 		
 		this.memoria.add(toAdd);
 	}
+	public void aggiungiMezzo(final String toParse) throws Exception
+	{
+		String className = "";
+		String tmp = "";
+		int i = 0;
+		int l = toParse.length();
+		// Ricerca token
+		for(;i < l && toParse.charAt(i) != '{' && toParse.charAt(i) != '\n'; i++)
+		{
+			className = className.concat(String.valueOf(toParse.charAt(i)));
+		}
+		
+		// Prendo la classe
+		for(; i < l && toParse.charAt(i-1) != '}'; i++)
+		{
+			tmp = tmp.concat(String.valueOf(toParse.charAt(i)));
+		}
+		
+		if(className.equals(Camion.class.getSimpleName()))
+			this.aggiungiMezzo(new Camion(tmp));
+		else if (className.equals(Furgone.class.getSimpleName()))
+			this.aggiungiMezzo(new Furgone(tmp));
+		else if (className.equals("STOP"))
+			;
+		else
+			throw new Exception("Someone has insert a mismatch name: \"" + className + "\"!");
+	}
 	
 	public void aggiungiMezzo(final Camion toAdd) throws Exception
 	{

@@ -6,10 +6,66 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import agenzia.ListaTrasporti;
+import autoveicoli.Camion;
+import autoveicoli.Furgone;
 
 public class IlMain 
 {
+	public static String aggiungi(final Scanner cin) throws Exception
+	{
+		// Variabili
+		String output = "";
+		String tmp0, tmp1;
+		
+		// Inzio input
+		System.out.println("Digitare nome classe veicolo (Camion ovvero Furgone): ");
+		tmp0 = cin.nextLine();
+		
+		if((!tmp0.equals(Furgone.class.getSimpleName())) && (!tmp0.equals(Camion.class.getSimpleName())))
+		{
+			System.err.println("Non era una cosa giusta!\n");
+			return null;
+		}
+		output = output.concat(tmp0 + "\n{");
+		
+		System.out.println("Inserire targa:");
+		output = output.concat("targa:" + cin.nextLine() + ';');
+		
+		System.out.println("Inserire numero Km da percorre: ");
+		output = output.concat("numeroKm:" + cin.nextLine() + ";");
 
+		System.out.println("Inserire data produzione nel formato dd/MM/yyyy :");
+		output = output.concat("dataProduzione:" + cin.nextLine() + ";");
+		
+		if(tmp0.equals("Furgone"))
+		{
+			System.out.println("Inserire numero di pubblicità applicabili: ");
+			output = output.concat("numeroPubblicita:" + cin.nextLine() + ';');
+			
+			System.out.println("Inserire velocità media del veicolo: ");
+			tmp1 = cin.nextLine();
+			tmp1 = tmp1.replace(',', '.');
+			output = output.concat("velocitaMedia:" + tmp1 + ";");
+		}
+		else
+		{
+			System.out.println("È un camion frigorifero [true ovvero false]: ");
+			output = output.concat("isFrigo:" + cin.nextLine() + ";");
+			
+			System.out.println("Inserire la capacità di carico in chilogrammi: ");
+			output = output.concat("capacitaCarico:" + cin.nextLine() + ';');
+			
+			System.out.println("Inserire le città raggiungibili separate da ', '(virgola + spazio): ");
+			tmp1 = cin.nextLine();
+			output = output.concat("cittaRaggiungibili:[" + tmp1 + "];");
+		}
+		
+		output = output.concat("}");
+		
+		System.out.println(output);
+		return output;
+	}
+	
 	public static void main(String[] args) throws Exception 
 	{
 		// Variabili
@@ -48,6 +104,9 @@ public class IlMain
 				{
 				case 0:
 					System.out.println("Uscita!");
+					break;
+				case 1:
+					autorimessa.aggiungiMezzo(aggiungi(cin));
 					break;
 				case 4:
 					System.out.print("Inserire percoroso documento (Lasciare vuoto per scrivere su ./files/output): ");

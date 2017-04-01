@@ -1,26 +1,9 @@
 Furgone
 {
-numeroKm:5;
-targa:XX-000-YY;
-dataProduzione:23/12/2010;
-velocitaMedia:23.2;
-numeroPubblicita:5;
-}
-Camion
-{
-numeroKm:100;
-targa:Hey sono un camion;
-dataProduzione:23/12/2012;
-isFrigo:false;
-capacitaCarico:10;
-cittaRaggiungibili:[Pisa, Livorno, Firenze, Sesto San Giovanni];
-}
-Furgone
-{
-numeroKm:45;
-targa:Banana;
-dataProduzione:01/01/1800;
-velocitaMedia:60.0;
-numeroPubblicita:300;
+numeroKm:2;
+targa:xx;
+dataProduzione:02/02/2002;
+velocitaMedia:500.0;
+numeroPubblicita:4;
 }
 STOP
