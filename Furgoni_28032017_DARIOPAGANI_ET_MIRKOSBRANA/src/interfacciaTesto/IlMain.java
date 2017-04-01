@@ -1,5 +1,7 @@
 package interfacciaTesto;
 
+import java.io.File;
+import java.io.PrintStream;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -29,6 +31,7 @@ public class IlMain
 		{
 			try
 			{
+				String path;
 				System.out.print(
 						"1. Aggiungere un veicolo da console\n" + 
 						"2. Cancellare un veicolo da console\n" +
@@ -45,6 +48,20 @@ public class IlMain
 				{
 				case 0:
 					System.out.println("Uscita!");
+					break;
+				case 4:
+					System.out.print("Inserire percoroso documento (Lasciare vuoto per scrivere su ./files/output): ");
+					path = cin.nextLine();
+					autorimessa.writeToBuffer(new PrintStream(new File(path.equals("") ? "./files/output" : path)));
+					if(path.equals(""))
+						cin.reset();
+					break;
+				case 5:
+					System.out.print("Inserire percoroso documento (inserire 'OK' per scrivere su ./files/input): ");
+					path = cin.nextLine();
+					autorimessa.parse(new Scanner(new File(path.equals("") ? "./files/input" : path)));
+					if(path.equals(""))
+						cin.reset();
 					break;
 				default:
 					System.out.flush();

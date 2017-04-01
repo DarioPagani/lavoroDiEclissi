@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.function.Predicate;
 
+
 import autoveicoli.Autoveicolo;
 import autoveicoli.Camion;
 import autoveicoli.Furgone;
@@ -139,7 +140,7 @@ public class ListaTrasporti
 		if(!trovato)
 			throw new Exception("Non found that number plate!\n");
 		
-		if(index.getDataProduzione().getTimeInMillis() + ((long)anniMassimi * (new Long("31556952000")).longValue()) > (System.currentTimeMillis()))
+		if(index.getDataProduzione().getTimeInMillis() + ((long)anniMassimi * 31556952000l) > (System.currentTimeMillis()))
 			return false;
 		else if(index.getNumeroKm() <= 0)
 			return false;
