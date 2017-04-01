@@ -2,7 +2,6 @@ package agenzia;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.Scanner;
 import java.util.function.Predicate;
 
@@ -127,7 +126,7 @@ public class ListaTrasporti
 		return totale;
 	}
 	
-	/*public boolean circolazioneAmessa(final String targa, final GregorianCalendar dataScadenza)
+	public boolean circolazioneAmessa(final String targa, final int anniMassimi) throws Exception
 	{
 		Autoveicolo index = null;
 		boolean trovato = false;
@@ -137,5 +136,14 @@ public class ListaTrasporti
 				trovato = true;
 				index = this.memoria.get(i);
 			}
-	}*/
+		if(!trovato)
+			throw new Exception("Non found that number plate!\n");
+		
+		if(index.getDataProduzione().getTimeInMillis() + ((long)anniMassimi * (new Long("31556952000")).longValue()) > (System.currentTimeMillis()))
+			return false;
+		else if(index.getNumeroKm() <= 0)
+			return false;
+		else
+			return true;
+	}
 }
