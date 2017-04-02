@@ -62,5 +62,4 @@ public class Furgone extends Autoveicolo
 	{
 		return "{\n" + super.toString(true) + "velocitaMedia:" + this.velocitaMedia + ";\nnumeroPubblicita:" + this.numeroPubblicita + ";\n}";
 	}
-
 }

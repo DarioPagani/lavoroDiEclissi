@@ -154,7 +154,7 @@ public class ListaTrasporti
 		return totale;
 	}
 	
-	public boolean circolazioneAmessa(final String targa, final int anniMassimi) throws Exception
+	private Autoveicolo cerca(final String targa)
 	{
 		Autoveicolo index = null;
 		boolean trovato = false;
@@ -164,7 +164,14 @@ public class ListaTrasporti
 				trovato = true;
 				index = this.memoria.get(i);
 			}
-		if(!trovato)
+		return index;
+	}
+	
+	public boolean circolazioneAmessa(final String targa, final int anniMassimi) throws Exception
+	{
+		Autoveicolo index = this.cerca(targa);
+		
+		if(index == null)
 			throw new Exception("Non found that number plate!\n");
 		
 		if(index.getDataProduzione().getTimeInMillis() + ((long)anniMassimi * 31556952000l) > (System.currentTimeMillis()))
@@ -173,5 +180,11 @@ public class ListaTrasporti
 			return false;
 		else
 			return true;
+	}
+	
+	
+	public final Autoveicolo ottieni(final String targa)
+	{
+		return this.cerca(targa);
 	}
 }

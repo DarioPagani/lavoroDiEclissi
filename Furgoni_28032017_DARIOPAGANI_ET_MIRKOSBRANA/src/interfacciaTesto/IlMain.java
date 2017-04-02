@@ -6,6 +6,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import agenzia.ListaTrasporti;
+import autoveicoli.Autoveicolo;
 import autoveicoli.Camion;
 import autoveicoli.Furgone;
 
@@ -106,7 +107,20 @@ public class IlMain
 					System.out.println("Uscita!");
 					break;
 				case 1:
-					autorimessa.aggiungiMezzo(aggiungi(cin));
+					path = aggiungi(cin);
+					if(path != null)
+						autorimessa.aggiungiMezzo(path);
+					break;
+				case 2:
+					System.out.println("Inserire targa veicolo: ");
+					path = cin.nextLine();
+					autorimessa.rimuoviMezzo(path);
+					break;
+				case 3:
+					System.out.println("Inserire targa veicolo: ");
+					path = cin.nextLine();
+					Autoveicolo tmp1 = autorimessa.ottieni(path);
+					System.out.println(tmp1 == null ? "Non esiste tale targa!" : tmp1.toString());
 					break;
 				case 4:
 					System.out.print("Inserire percoroso documento (Lasciare vuoto per scrivere su ./files/output): ");

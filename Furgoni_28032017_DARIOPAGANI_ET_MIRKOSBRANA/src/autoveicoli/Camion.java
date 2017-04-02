@@ -62,6 +62,7 @@ public class Camion extends Autoveicolo
 			tmp = tmp.concat(String.valueOf(parse.charAt(i)));
 		}
 		this.cittaRaggiungibili = new ArrayList<String>(Arrays.asList(tmp.split(", ")));
+
 	}
 	
 	public String toString()
