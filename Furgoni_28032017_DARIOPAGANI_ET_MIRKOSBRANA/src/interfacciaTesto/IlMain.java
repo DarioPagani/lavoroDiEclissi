@@ -6,6 +6,9 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import agenzia.ListaTrasporti;
+import agenzia.NoPlateFound;
+import agenzia.PlateAreEquals;
+import agenzia.RimessaPiena;
 import autoveicoli.Autoveicolo;
 import autoveicoli.Camion;
 import autoveicoli.Furgone;
@@ -72,7 +75,7 @@ public class IlMain
 		// Variabili
 		ListaTrasporti		autorimessa = null;
 		Scanner				cin			= new Scanner(System.in);
-		int					tmp0		= -1;
+		int					tmp0		= -1, tmp6;
 		
 		System.out.print("Inserire capacità della rimessa: ");
 		do
@@ -89,7 +92,7 @@ public class IlMain
 			try
 			{
 				String path;
-				System.out.print(
+				System.out.print( "\n" + 
 						"1. Aggiungere un veicolo da console\n" + 
 						"2. Cancellare un veicolo da console\n" +
 						"3. Visualizza un veicolo su console\n" + 
@@ -136,6 +139,23 @@ public class IlMain
 					if(path.equals(""))
 						cin.reset();
 					break;
+				case 6:
+					System.out.println("Tutti i veicoli possono ancora percorerre " + autorimessa.totaleChilometri() + "Km!");
+					break;
+				case 7:
+					System.out.print("Inserire targa veicolo: ");
+					path = cin.nextLine();
+					System.out.print("Di quanti chilometri: ");
+					tmp6 = (new Integer(cin.nextLine())).intValue();
+					System.out.println("Rimangano: " + autorimessa.decrementaChilometri(path, tmp6));
+					break;
+				case 8:
+					System.out.print("Inserire targa veicolo: ");
+					path = cin.nextLine();
+					System.out.print("Inserire il numero anni massimo di anni che il veicolo può circolare dalla sua immatricolazione: ");
+					tmp6 = (new Integer(cin.nextLine())).intValue();
+					System.out.println("Rimangano: " + autorimessa.circolazioneAmessa(path, tmp6));					
+					break;
 				default:
 					System.out.flush();
 					System.err.print("\nQuesta opzione non è valida ovvero non ancora implementata!\n");
@@ -151,6 +171,22 @@ public class IlMain
 				System.err.flush();
 				System.out.flush();
 				cin.nextLine();
+			}
+			catch(OutOfMemoryError e)
+			{
+				System.err.println("La rimessa è piena! Errore:\n" + e.toString());
+			}
+			catch(PlateAreEquals e)
+			{
+				System.err.println(e.toString() + "\nRisolvere conflitti; Veicolo da Aggiungere: " + e.getA().toString() + "\nVeicolo esistente: " + e.getB().toString());
+			}
+			catch(RimessaPiena e)
+			{
+				System.err.println(e.toString());
+			}
+			catch(NoPlateFound e)
+			{
+				System.err.println(e.toString());
 			}
 			catch(Exception error)
 			{

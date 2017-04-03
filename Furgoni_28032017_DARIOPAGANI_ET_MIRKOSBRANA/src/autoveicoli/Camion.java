@@ -88,6 +88,7 @@ public class Camion extends Autoveicolo
 	
 	public void decrementaKm(int numeroDaDecrementare)
 	{
+		System.err.println("OVERLAY!!!");
 		if (this.isFrigo){
 			
 			numeroDaDecrementare += numeroDaDecrementare/10;

@@ -1,26 +1,44 @@
 Furgone
 {
-numeroKm:5;
-targa:XX-000-YY;
-dataProduzione:23/12/2010;
-velocitaMedia:23.2;
-numeroPubblicita:5;
+	numeroKm:5;
+	targa:aa000aa;
+	dataProduzione:23/12/2010;
+	velocitaMedia:23.2;
+	numeroPubblicita:5;
 }
 Camion
 {
-numeroKm:100;
-targa:Hey sono un camion;
-dataProduzione:23/12/2012;
-isFrigo:false;
-capacitaCarico:10;
-cittaRaggiungibili:[Pisa, Livorno, Firenze, Sesto San Giovanni];
+	numeroKm:105;
+	targa:aa000bb;
+	dataProduzione:23/12/2012;
+	isFrigo:false;
+	capacitaCarico:10;
+	cittaRaggiungibili:[Pisa, Livorno, Firenze, Sesto San Giovanni];
 }
 Furgone
 {
-numeroKm:45;
-targa:Banana;
-dataProduzione:01/01/1800;
-velocitaMedia:60.0;
-numeroPubblicita:300;
+	numeroKm:45;
+	targa:bb000bb;
+	dataProduzione:01/01/1800;
+	velocitaMedia:60.0;
+	numeroPubblicita:300;
+}
+Camion
+{
+	numeroKm:500;
+	targa:cc000cc;
+	dataProduzione:05/02/2004;
+	isFrigo:true;
+	capacitaCarico:15;
+	cittaRaggiungibili:[Milano, Sant'Ermete, Firenze, Roma, Catanzaro, Pisa, Parigi];
+}
+Camion
+{
+	numeroKm:500;
+	targa:cc000dd;
+	dataProduzione:05/02/2009;
+	isFrigo:true;
+	capacitaCarico:15;
+	cittaRaggiungibili:[Mosca, Parigi, Berlino, Milano];
 }
 STOP

@@ -13,6 +13,7 @@ import autoveicoli.Furgone;
 public class ListaTrasporti 
 {
 	private	ArrayList<Autoveicolo>			memoria		= null;
+	private int								capacita	= 0;
 	
 	public ListaTrasporti(final int dimensioneParcoVeicoli) throws Exception
 	{
@@ -20,6 +21,7 @@ public class ListaTrasporti
 			throw new Exception("Minimun 1 vehicles!");
 		
 		this.memoria = new ArrayList<Autoveicolo>(dimensioneParcoVeicoli);
+		this.capacita = dimensioneParcoVeicoli;
 	}
 	
 	public void parse(final Scanner cin) throws Exception
@@ -89,17 +91,30 @@ public class ListaTrasporti
 	}
 	
 	// Metodi veri
-	public void aggiungiMezzo(final Autoveicolo toAdd) throws Exception
+	public boolean aggiungiMezzo(final Autoveicolo toAdd) throws Exception
 	{
+		if(this.memoria.size() >= this.capacita)
+			new RimessaPiena();
+		
 		boolean esiste = false;
-		for(int i = 0, l = this.memoria.size(); i < l && (!esiste); i++)
+		int i,l;
+		for(i = 0, l = this.memoria.size(); i < l && (!esiste); i++)
 			if(this.memoria.get(i).getTarga().equals(toAdd.getTarga()))
 				esiste = true;
 		
 		if(esiste)
-			throw new Exception("Another vheichle has the same number plate!\n");
+		{
+			if(this.memoria.get(i - 1).toString().equals(toAdd.toString()))
+			{
+				System.err.println("Skipping \"" + toAdd.getTarga() + "\" already extis!");
+				return false;
+			}
+			else
+				throw new PlateAreEquals(toAdd, this.memoria.get(i - 1));
+		}
 		
 		this.memoria.add(toAdd);
+		return true;
 	}
 	public void aggiungiMezzo(final String toParse) throws Exception
 	{
@@ -172,7 +187,7 @@ public class ListaTrasporti
 		Autoveicolo index = this.cerca(targa);
 		
 		if(index == null)
-			throw new Exception("Non found that number plate!\n");
+			throw new NoPlateFound();
 		
 		if(index.getDataProduzione().getTimeInMillis() + ((long)anniMassimi * 31556952000l) > (System.currentTimeMillis()))
 			return false;
@@ -182,6 +197,16 @@ public class ListaTrasporti
 			return true;
 	}
 	
+	public int decrementaChilometri(final String targa, final int quanto) throws Exception
+	{
+		Autoveicolo x = this.cerca(targa);
+		
+		if(x == null)
+			throw new NoPlateFound();
+		
+		x.decrementaKm(quanto);
+		return x.getNumeroKm();
+	}
 	
 	public final Autoveicolo ottieni(final String targa)
 	{
