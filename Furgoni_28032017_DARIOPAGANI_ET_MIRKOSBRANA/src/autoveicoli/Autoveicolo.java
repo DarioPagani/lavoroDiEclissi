@@ -26,7 +26,7 @@ public class Autoveicolo
 		int numeroKmPOS = parse.lastIndexOf("numeroKm:");
 		
 		if(numeroKmPOS == -1)
-			throw new Exception("Not found token \"numeroKm:\" in string");
+			new ParseException("numeroKm:");
 		else
 			numeroKmPOS+=9;
 		
@@ -38,7 +38,7 @@ public class Autoveicolo
 		
 		int targaPOS = parse.lastIndexOf("targa:");
 		if(targaPOS == -1)
-			throw new Exception("Not found token \"targa:\" in string");
+			throw new ParseException("targa:");
 		else
 			targaPOS+=("targa:").length();
 		tmp = "";
@@ -53,7 +53,7 @@ public class Autoveicolo
 		// Ricerca data di produzione
 		int dataProduzioneKmPOS = parse.lastIndexOf("dataProduzione:");
 		if(dataProduzioneKmPOS == -1)
-			throw new Exception("Not found token \"dataProduzione:\" in string");
+			throw new ParseException("dataProduzione:");
 		else
 			dataProduzioneKmPOS+=+ ("dataProduzione:").length();
 		
@@ -62,7 +62,7 @@ public class Autoveicolo
 			tmp = tmp.concat(String.valueOf(parse.charAt(i)));
 		}
 		
-		this.dataProduzione = new GregorianCalendar();		
+		this.dataProduzione = new GregorianCalendar();
 		this.dataProduzione.setTime((new SimpleDateFormat("dd/MM/yyyy")).parse(tmp));
 	}
 

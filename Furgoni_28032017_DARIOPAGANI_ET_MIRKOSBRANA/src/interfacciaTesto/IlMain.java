@@ -12,6 +12,7 @@ import agenzia.RimessaPiena;
 import autoveicoli.Autoveicolo;
 import autoveicoli.Camion;
 import autoveicoli.Furgone;
+import autoveicoli.ParseException;
 
 public class IlMain 
 {
@@ -69,6 +70,8 @@ public class IlMain
 		System.out.println(output);
 		return output;
 	}
+	
+	public static final String sadError = "È finita la memoria :P Non è possibile fare più nulla!";
 	
 	public static void main(String[] args) throws Exception 
 	{
@@ -174,7 +177,7 @@ public class IlMain
 			}
 			catch(OutOfMemoryError e)
 			{
-				System.err.println("La rimessa è piena! Errore:\n" + e.toString());
+				System.err.println(sadError);
 			}
 			catch(PlateAreEquals e)
 			{
@@ -188,10 +191,15 @@ public class IlMain
 			{
 				System.err.println(e.toString());
 			}
+			catch(ParseException e)
+			{
+				System.err.println(e.toString());
+			}
 			catch(Exception error)
 			{
-				System.err.println("Qualcosa è andato storto:\n" + error.toString() + "\nUscita...");
-				System.exit(-1);
+				System.err.println("Qualcosa è andato storto:\n" + error.toString() + "\nVolete provare a continuare [true ovvero false]? ");
+				if(!(new Boolean(cin.nextLine()).booleanValue()))
+					System.exit(-1);
 			}
 		}
 		
